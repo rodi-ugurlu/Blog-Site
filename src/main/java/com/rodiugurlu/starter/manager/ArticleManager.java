@@ -20,7 +20,7 @@ public class ArticleManager implements ArticleService {
     @Override
     public List<Article> getAllArticles() {
         List<Article> articles = articleRepository.findAll();
-       for (Article article : articles) {}
+       for (Article articlee : articles) {}
         return articles;
     }
 
