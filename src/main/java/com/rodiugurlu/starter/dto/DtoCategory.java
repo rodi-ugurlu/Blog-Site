@@ -1,12 +1,2 @@
-package com.rodiugurlu.starter.dto;
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
-public class DtoCategory {
-    private String categoryName;
+package com.rodiugurlu.starter.dto;public class DtoCategory {
 }

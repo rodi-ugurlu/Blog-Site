@@ -12,4 +12,5 @@ public class DtoArticle {
     private String title;
 
     private String content;
+
 }

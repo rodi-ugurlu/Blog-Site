@@ -33,4 +33,12 @@ public class ArticleManager implements ArticleService {
     public List<DtoArticle> getArticlesByCategory(int categoryId) {
 return null;
     }
+
+    @Override
+    public DtoArticle postArticle(Article article) {
+        DtoArticle dtoArticle = new DtoArticle();
+        articleRepository.save(article);
+        BeanUtils.copyProperties(article, dtoArticle);
+        return dtoArticle;
+    }
 }

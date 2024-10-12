@@ -1,8 +1,6 @@
 package com.rodiugurlu.starter.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,9 +12,14 @@ import lombok.NoArgsConstructor;
 @Table(name = "article_table")
 public class Article {
     @Id
+    @Column(nullable = true)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private String title;
 
+    @Column(length = 100000)
     private String content;
+
+
 }

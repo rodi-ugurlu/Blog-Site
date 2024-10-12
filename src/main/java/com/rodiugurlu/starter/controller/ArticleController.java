@@ -1,11 +1,12 @@
 package com.rodiugurlu.starter.controller;
 
 import com.rodiugurlu.starter.dto.DtoArticle;
+import com.rodiugurlu.starter.entity.Article;
 import com.rodiugurlu.starter.service.ArticleService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,4 +19,13 @@ public class ArticleController {
     public List<DtoArticle> getArticles() {
         return articleService.getArticles();
     }
+
+    @PostMapping("/postArticle")
+    @ResponseStatus(code = HttpStatus.CREATED)
+    public DtoArticle postArticle(@RequestBody @Valid Article savedArticle) {
+        return articleService.postArticle(savedArticle);
+
+    }
+
+
 }
