@@ -1,7 +1,9 @@
 package com.rodiugurlu.starter.manager;
 
 import com.rodiugurlu.starter.dto.DtoArticle;
+import com.rodiugurlu.starter.dto.DtoCategory;
 import com.rodiugurlu.starter.entity.Article;
+import com.rodiugurlu.starter.entity.Category;
 import com.rodiugurlu.starter.repository.ArticleRepository;
 import com.rodiugurlu.starter.service.ArticleService;
 import lombok.AllArgsConstructor;
@@ -10,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -30,15 +31,24 @@ public class ArticleManager implements ArticleService {
     }
 
     @Override
-    public List<DtoArticle> getArticlesByCategory(int categoryId) {
-return null;
+    public List<DtoArticle> getArticlesByCategory(String categoryName) {
+        List<DtoArticle> dtoArticles = new ArrayList<>();
+        List<Article> articles = articleRepository.findArticleByCategory(categoryName);
+        for (Article item : articles) {
+            DtoArticle dtoArticle = new DtoArticle();
+            BeanUtils.copyProperties(item, dtoArticle);
+            dtoArticles.add(dtoArticle);
+        }
+        return dtoArticles;
     }
 
     @Override
-    public DtoArticle postArticle(Article article) {
-        DtoArticle dtoArticle = new DtoArticle();
-        articleRepository.save(article);
-        BeanUtils.copyProperties(article, dtoArticle);
+    public DtoArticle postArticle(DtoArticle dtoArticle) {
+        Article articleEntity = new Article();
+        BeanUtils.copyProperties(dtoArticle, articleEntity);
+        articleRepository.save(articleEntity);
+        DtoCategory dtoCategory = new DtoCategory();
+        dtoArticle.setDtoCategory(dtoCategory);
         return dtoArticle;
     }
 }

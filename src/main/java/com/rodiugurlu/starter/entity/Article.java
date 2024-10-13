@@ -1,5 +1,6 @@
 package com.rodiugurlu.starter.entity;
 
+import com.rodiugurlu.starter.dto.DtoCategory;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,6 +21,7 @@ public class Article {
 
     @Column(length = 100000)
     private String content;
-
+    @ManyToOne
+    private Category category;
 
 }

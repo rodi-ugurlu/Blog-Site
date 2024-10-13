@@ -8,8 +8,6 @@ import java.util.List;
 public interface ArticleService {
     List<DtoArticle> getArticles();
 
-    List<DtoArticle> getArticlesByCategory(int categoryId);
-    DtoArticle postArticle(Article article);
-
-
+    List<DtoArticle> getArticlesByCategory(String categoryName);
+    DtoArticle postArticle(DtoArticle article);
 }

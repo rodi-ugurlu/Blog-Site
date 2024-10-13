@@ -13,4 +13,6 @@ public class DtoArticle {
 
     private String content;
 
+    private DtoCategory dtoCategory;
+
 }
