@@ -21,7 +21,7 @@ public class ArticleController {
         return articleService.getArticles();
     }
 
-    @PostMapping
+    @PostMapping("/post")
     @ResponseStatus(code = HttpStatus.CREATED)
     public DtoArticle postArticle(@RequestBody @Valid DtoArticle dtoArticle) {
         return articleService.postArticle(dtoArticle);

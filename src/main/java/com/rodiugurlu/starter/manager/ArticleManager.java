@@ -74,6 +74,6 @@ public class ArticleManager implements ArticleService {
          if (op.isPresent()) {
              return op.get();
          }
-         throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+         throw new BaseException(new ErrorMessage(MessageType.RECORD_NOT_FOUND,String.valueOf(id)));
     }
 }
