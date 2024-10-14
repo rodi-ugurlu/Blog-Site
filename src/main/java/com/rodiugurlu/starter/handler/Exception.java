@@ -10,7 +10,7 @@ import java.util.Date;
 @NoArgsConstructor
 public class Exception <T>{
     private String hostName;
-    private String path;
+    private int path;
     private Date time;
     private T data;
     public void setPath(String desc){}
