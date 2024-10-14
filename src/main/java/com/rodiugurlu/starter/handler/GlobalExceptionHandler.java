@@ -21,7 +21,7 @@ public class GlobalExceptionHandler <T>{
 
     }
 
-    private String getHostname(){
+    private String getHostName(){
         try {
             return InetAddress.getLocalHost().getHostName();
         }catch (UnknownHostException e) {
@@ -42,5 +42,4 @@ public class GlobalExceptionHandler <T>{
     apiError.setException(exception);
     return apiError;
 }
-
 }
