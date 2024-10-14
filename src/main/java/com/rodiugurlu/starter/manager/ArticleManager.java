@@ -4,6 +4,9 @@ import com.rodiugurlu.starter.dto.DtoArticle;
 import com.rodiugurlu.starter.dto.DtoCategory;
 import com.rodiugurlu.starter.entity.Article;
 import com.rodiugurlu.starter.entity.Category;
+import com.rodiugurlu.starter.exception.BaseException;
+import com.rodiugurlu.starter.exception.ErrorMessage;
+import com.rodiugurlu.starter.exception.MessageType;
 import com.rodiugurlu.starter.repository.ArticleRepository;
 import com.rodiugurlu.starter.service.ArticleService;
 import lombok.AllArgsConstructor;
@@ -62,7 +65,7 @@ public class ArticleManager implements ArticleService {
            articleRepository.delete(optional.get());
            throw new ResponseStatusException(HttpStatus.NO_CONTENT);
        }
-           throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        throw new BaseException(new ErrorMessage(MessageType.NO_RECORD_EXIST,String.valueOf(id)));
     }
 
     @Override
