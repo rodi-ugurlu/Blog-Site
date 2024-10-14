@@ -8,10 +8,13 @@ import com.rodiugurlu.starter.repository.ArticleRepository;
 import com.rodiugurlu.starter.service.ArticleService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -50,5 +53,24 @@ public class ArticleManager implements ArticleService {
         DtoCategory dtoCategory = new DtoCategory();
         dtoArticle.setDtoCategory(dtoCategory);
         return dtoArticle;
+    }
+
+    @Override
+    public void deleteArticleById(int id) {
+       Optional<Article> optional= articleRepository.findById(id);
+       if (optional.isPresent()) {
+           articleRepository.delete(optional.get());
+           throw new ResponseStatusException(HttpStatus.NO_CONTENT);
+       }
+           throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+    }
+
+    @Override
+    public Article getArticleById(int id) {
+         Optional<Article> op =articleRepository.findById(id);
+         if (op.isPresent()) {
+             return op.get();
+         }
+         throw new ResponseStatusException(HttpStatus.NOT_FOUND);
     }
 }

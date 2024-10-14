@@ -10,4 +10,6 @@ public interface ArticleService {
 
     List<DtoArticle> getArticlesByCategory(String categoryName);
     DtoArticle postArticle(DtoArticle article);
+    void deleteArticleById(int id);
+    Article getArticleById(int id);
 }

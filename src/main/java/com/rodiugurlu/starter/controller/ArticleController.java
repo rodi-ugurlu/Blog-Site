@@ -1,6 +1,7 @@
 package com.rodiugurlu.starter.controller;
 
 import com.rodiugurlu.starter.dto.DtoArticle;
+import com.rodiugurlu.starter.entity.Article;
 import com.rodiugurlu.starter.service.ArticleService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -15,12 +16,12 @@ import java.util.List;
 public class ArticleController {
     private ArticleService articleService;
 
-    @GetMapping("/getArticles")
+    @GetMapping
     public List<DtoArticle> getArticles() {
         return articleService.getArticles();
     }
 
-    @PostMapping("/postArticle")
+    @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
     public DtoArticle postArticle(@RequestBody @Valid DtoArticle dtoArticle) {
         return articleService.postArticle(dtoArticle);
@@ -31,5 +32,13 @@ public class ArticleController {
         return articleService.getArticlesByCategory(categoryName);
     }
 
+    @DeleteMapping("/{id}")
+    public void deleteArticle(@PathVariable (name = "id") int id) {
+    articleService.deleteArticleById(id);
+    }
 
+    @GetMapping("/{id}")
+    public Article getArticleById(@PathVariable (name = "id") int id) {
+        return articleService.getArticleById(id);
+    }
 }
