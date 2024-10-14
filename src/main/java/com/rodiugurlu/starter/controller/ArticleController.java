@@ -38,7 +38,7 @@ public class ArticleController {
     }
 
     @GetMapping("/{id}")
-    public Article getArticleById(@PathVariable (name = "id") int id) {
+    public Article getArticleByIdd(@PathVariable (name = "id") int id) {
         return articleService.getArticleById(id);
     }
 }
