@@ -36,7 +36,7 @@ public class GlobalExceptionHandler <T>{
     apiError.setStatus(HttpStatus.BAD_REQUEST.value());
     Exception<T> exception = new Exception<>();
     exception.setTime(new Date());
-    exception.setHostName(exception.getHostName());
+    exception.setHostName(getHostName());
     exception.setPath(request.getDescription(false));
     exception.setData(data);
     apiError.setException(exception);
