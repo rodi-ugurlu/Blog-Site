@@ -14,9 +14,9 @@ public class ErrorMessage {
 
     public String prepareErrorMessage() {
         StringBuilder builder = new StringBuilder();
-        builder.append(messageType.getMessage());  // MessageType üzerinden mesajı al
+        builder.append(messageType.getMessage());
         if (ofStatic != null) {
-            builder.append(" : ").append(ofStatic);  // Ekstra bilgi varsa ekle
+            builder.append(" : ").append(ofStatic);
         }
         return builder.toString();
     }
