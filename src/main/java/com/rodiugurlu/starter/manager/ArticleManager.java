@@ -26,11 +26,17 @@ public class ArticleManager implements ArticleService {
 
     @Override
     public List<DtoArticle> getArticles() {
+        DtoCategory category = new DtoCategory();
         List<Article> articles = articleRepository.findAll();
         List<DtoArticle> dtoArticles = new ArrayList<>();
         for (Article item : articles) {
             DtoArticle dtoArticle = new DtoArticle();
             BeanUtils.copyProperties(item, dtoArticle);
+            if (item.getCategory() != null) {
+                DtoCategory dtoCategory = new DtoCategory();
+                BeanUtils.copyProperties(item.getCategory(), dtoCategory);
+            }
+            BeanUtils.copyProperties(category, dtoArticle);
             dtoArticles.add(dtoArticle);
         }
         return dtoArticles;
@@ -57,7 +63,7 @@ public class ArticleManager implements ArticleService {
         articleRepository.save(articleEntity);
         DtoCategory dtoCategory = new DtoCategory();
         BeanUtils.copyProperties(category, dtoCategory);
-        dtoArticle.setDtoCategory(dtoCategory);
+//        dtoArticle.setDtoCategory(dtoCategory);
         return dtoArticle;
 
     }
