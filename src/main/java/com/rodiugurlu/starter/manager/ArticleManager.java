@@ -26,33 +26,34 @@ public class ArticleManager implements ArticleService {
 
     @Override
     public List<DtoArticle> getArticles() {
-        DtoCategory category = new DtoCategory();
         List<Article> articles = articleRepository.findAll();
+        return convertToDtoArticles(articles);
+    }
+
+    @Override
+    public List<DtoArticle> getArticlesByCategory(String categoryName) {
+        List<Article> articles = articleRepository.findArticleByCategory(categoryName);
+        return convertToDtoArticles(articles);
+    }
+
+    private List<DtoArticle> convertToDtoArticles(List<Article> articles) {
         List<DtoArticle> dtoArticles = new ArrayList<>();
         for (Article item : articles) {
+            Category category = item.getCategory();
+            DtoCategory dtoCategory = new DtoCategory();
+
+            if (category != null) {
+                BeanUtils.copyProperties(category, dtoCategory);
+            }
+
             DtoArticle dtoArticle = new DtoArticle();
             BeanUtils.copyProperties(item, dtoArticle);
-            if (item.getCategory() != null) {
-                DtoCategory dtoCategory = new DtoCategory();
-                BeanUtils.copyProperties(item.getCategory(), dtoCategory);
-            }
-            BeanUtils.copyProperties(category, dtoArticle);
+            dtoArticle.setDtoCategory(dtoCategory);
             dtoArticles.add(dtoArticle);
         }
         return dtoArticles;
     }
 
-    @Override
-    public List<DtoArticle> getArticlesByCategory(String categoryName) {
-        List<DtoArticle> dtoArticles = new ArrayList<>();
-        List<Article> articles = articleRepository.findArticleByCategory(categoryName);
-        for (Article item : articles) {
-            DtoArticle dtoArticle = new DtoArticle();
-            BeanUtils.copyProperties(item, dtoArticle);
-            dtoArticles.add(dtoArticle);
-        }
-        return dtoArticles;
-    }
 
     @Override
     public DtoArticle postArticle(DtoArticle dtoArticle) {
@@ -63,7 +64,7 @@ public class ArticleManager implements ArticleService {
         articleRepository.save(articleEntity);
         DtoCategory dtoCategory = new DtoCategory();
         BeanUtils.copyProperties(category, dtoCategory);
-//        dtoArticle.setDtoCategory(dtoCategory);
+        dtoArticle.setDtoCategory(dtoCategory);
         return dtoArticle;
 
     }

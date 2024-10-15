@@ -21,6 +21,8 @@ public class Article {
 
     @Column(length = 100000)
     private String content;
+
+
     @ManyToOne
     private Category category;
 
