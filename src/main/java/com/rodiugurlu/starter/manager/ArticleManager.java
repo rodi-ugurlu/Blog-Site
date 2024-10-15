@@ -52,28 +52,32 @@ public class ArticleManager implements ArticleService {
     public DtoArticle postArticle(DtoArticle dtoArticle) {
         Article articleEntity = new Article();
         BeanUtils.copyProperties(dtoArticle, articleEntity);
+        Category category = articleRepository.findCategoryByName(dtoArticle.getDtoCategory().getCategoryName());
+        articleEntity.setCategory(category);
         articleRepository.save(articleEntity);
         DtoCategory dtoCategory = new DtoCategory();
+        BeanUtils.copyProperties(category, dtoCategory);
         dtoArticle.setDtoCategory(dtoCategory);
         return dtoArticle;
+
     }
 
     @Override
     public void deleteArticleById(int id) {
-       Optional<Article> optional= articleRepository.findById(id);
-       if (optional.isPresent()) {
-           articleRepository.delete(optional.get());
-           throw new ResponseStatusException(HttpStatus.NO_CONTENT);
-       }
-        throw new BaseException(new ErrorMessage(MessageType.NO_RECORD_EXIST,String.valueOf(id)));
+        Optional<Article> optional = articleRepository.findById(id);
+        if (optional.isPresent()) {
+            articleRepository.delete(optional.get());
+            throw new ResponseStatusException(HttpStatus.NO_CONTENT);
+        }
+        throw new BaseException(new ErrorMessage(MessageType.NO_RECORD_EXIST, String.valueOf(id)));
     }
 
     @Override
     public Article getArticleById(int id) {
-         Optional<Article> op =articleRepository.findById(id);
-         if (op.isPresent()) {
-             return op.get();
-         }
-         throw new BaseException(new ErrorMessage(MessageType.RECORD_NOT_FOUND,String.valueOf(id)));
+        Optional<Article> op = articleRepository.findById(id);
+        if (op.isPresent()) {
+            return op.get();
+        }
+        throw new BaseException(new ErrorMessage(MessageType.RECORD_NOT_FOUND, String.valueOf(id)));
     }
 }

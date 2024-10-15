@@ -12,5 +12,9 @@ public interface ArticleRepository extends JpaRepository<Article, Integer> {
     @Query("SELECT a FROM Article a JOIN a.category c WHERE c.categoryName = ?1")
     List<Article> findArticleByCategory(String categoryName);
 
+    @Query("SELECT c FROM Category c WHERE c.categoryName = ?1")
+    Category findCategoryByName(String categoryName);
+
+
 
 }

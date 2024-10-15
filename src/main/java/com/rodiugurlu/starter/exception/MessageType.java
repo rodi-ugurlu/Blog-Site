@@ -8,7 +8,7 @@ import lombok.Setter;
 public enum MessageType {
     RECORD_NOT_FOUND("1000","RECORD NOT FOUND"),
     SUCCES("2000","PROCESS SUCCESSFUL"),
-    NO_RECORD_EXIST("3000","NO RECOR EXIST"),
+    NO_RECORD_EXIST("3000","NO RECORD EXIST"),
     GENERAL_EXCEPTION("4000","GENERAL ERROR OCCURRED");
     private String code;
     private String message;
