@@ -13,7 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("api/category")
 public class CategoryController {
-    @Autowired
+    @Autowired // constructer autowired vs field autowired
     private CategoryService categoryService;
 
     @GetMapping

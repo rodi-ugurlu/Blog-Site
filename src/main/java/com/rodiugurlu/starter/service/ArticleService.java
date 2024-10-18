@@ -6,10 +6,10 @@ import com.rodiugurlu.starter.entity.Article;
 import java.util.List;
 
 public interface ArticleService {
-    List<DtoArticle> getArticles();
-
+    List<Article> getArticles();
     List<DtoArticle> getArticlesByCategory(String categoryName);
     DtoArticle postArticle(DtoArticle article);
     void deleteArticleById(int id);
     Article getArticleById(int id);
+    DtoArticle updateArticleById(int id,DtoArticle article);
 }

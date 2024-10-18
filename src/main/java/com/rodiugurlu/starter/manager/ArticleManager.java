@@ -24,10 +24,10 @@ import java.util.Optional;
 public class ArticleManager implements ArticleService {
     private ArticleRepository articleRepository;
 
-    @Override
-    public List<DtoArticle> getArticles() {
+    @Override // we can use just Article,we talked about that point.
+    public List<Article> getArticles() {
         List<Article> articles = articleRepository.findAll();
-        return convertToDtoArticles(articles);
+       return articles;
     }
 
     @Override
@@ -86,5 +86,19 @@ public class ArticleManager implements ArticleService {
             return op.get();
         }
         throw new BaseException(new ErrorMessage(MessageType.RECORD_NOT_FOUND, String.valueOf(id)));
+    }
+
+    @Override   // when we want to make any change in article,we will need an update service.
+    public DtoArticle updateArticleById(int id, DtoArticle dtoArticle) {
+            DtoArticle dtoA = new DtoArticle();
+       Optional<Article> optional = articleRepository.findById(id);
+       if (optional.isPresent()) {
+           Article articleEntity = optional.get();
+           BeanUtils.copyProperties(dtoArticle, articleEntity);
+           articleRepository.save(articleEntity);
+           BeanUtils.copyProperties(articleEntity, dtoA);
+           return dtoA;
+       }
+       throw new BaseException(new ErrorMessage(MessageType.RECORD_NOT_FOUND, String.valueOf(id)));
     }
 }

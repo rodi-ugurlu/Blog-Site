@@ -11,6 +11,6 @@ public class DtoCategory {
 
     private String categoryName;
 
-    public void setDtoArticle(DtoArticle dtoArticle) {
-    }
+//    public void setDtoArticle(DtoArticle dtoArticle) {
+//    }
 }
